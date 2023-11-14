@@ -24,17 +24,18 @@ public class Login extends JFrame {
         
     Conexao con_cliente;
 
-    JLabel Login, Senha1;
+    JLabel Login, Senha1, img;
     JTextField Nome;
     JButton Logar;
     JPasswordField Senha;
 
     public Login() {
-        
-           Color fun = new Color(225, 205, 255);  
+                ImageIcon fun = new ImageIcon("src/Img/1.png");
+        img = new JLabel(fun);
+        img.setBounds(0,0, 1253, 863); 
         
         Container tela = getContentPane();
-        tela.setBackground(fun);
+       
 
         con_cliente = new Conexao();
         con_cliente.conecta();
@@ -87,7 +88,8 @@ public class Login extends JFrame {
         tela.add(Senha1);
         tela.add(Login);
 
-        setSize(800, 650);
+                tela.add(img);
+                setSize(1253, 863);
         setVisible(true);
         setLocationRelativeTo(null);
 

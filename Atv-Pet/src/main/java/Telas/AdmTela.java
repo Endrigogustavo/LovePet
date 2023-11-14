@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdmTela extends JFrame { 
     Conexao con_cliente;
-    JLabel rCodigo, rNome,rEspecie,rRaca,rCor,rPesquisar,rDes;
+    JLabel rCodigo, rNome,rEspecie,rRaca,rCor,rPesquisar,rDes, img;
     JTextField tCodigo, tNome,tEspecie,tRaca,tCor, tPesquisar,tDes;
     JButton primeiro, anterior, proximo, ultimo, registro, gravar, alterar, excluir,pesquisar,sair;
     
@@ -35,7 +35,10 @@ public class AdmTela extends JFrame {
      
     
     public AdmTela() throws SQLException, ParseException{
-
+                ImageIcon fun = new ImageIcon("src/Img/2.png");
+        img = new JLabel(fun);
+        img.setBounds(0,0, 1253, 863); 
+        
         Container tela = getContentPane();
         
         rCodigo = new JLabel("Codigo");
@@ -361,7 +364,8 @@ public class AdmTela extends JFrame {
         tela.add(rDes);
         tela.add(tPesquisar);
                 
-        setSize(1000,650);
+        tela.add(img);
+                setSize(1253, 863);
         setVisible(true);
         setLocationRelativeTo(null);
 
