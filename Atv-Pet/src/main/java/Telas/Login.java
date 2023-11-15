@@ -28,7 +28,7 @@ public class Login extends JFrame {
     JTextField Nome;
     JButton Logar;
     JPasswordField Senha;
-
+int tentativas = 3;
     public Login() {
                 ImageIcon fun = new ImageIcon("src/Img/1.png");
         img = new JLabel(fun);
@@ -49,37 +49,55 @@ public class Login extends JFrame {
         Nome = new JTextField();
         Senha = new JPasswordField();
         Logar = new JButton("Logar");
-
-        Login.setBounds(130, 80, 150, 30);
-        Senha1.setBounds(130, 180, 150, 30);
-        Nome.setBounds(130, 105, 220, 30);
-        Senha.setBounds(130, 205, 220, 30);
-        Logar.setBounds(165, 305, 150, 30);
-
+        Login.setBounds(510, 320, 190, 30);
+        
+        Senha1.setBounds(510, 420, 190, 30);
+        
+        Nome.setBounds(510, 350, 250, 30);
+        
+        Senha.setBounds(510, 450, 250, 30);
+        
+        Logar.setBounds(540, 550, 190, 30);
+        
         Logar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
    
                     String pesquisa2 = "select * from user where Login like '" +Nome.getText() + "' && Senha = " +Senha.getText() + "";
                     con_cliente.executaSQL(pesquisa2);
+               
+                
                 try {
-                    if(con_cliente.resultset.first()){
-                        AdmTela User = new AdmTela();
-                        User.setVisible(true);
-                        dispose();
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Erro");
-                    }
+ 
+                        if (con_cliente.resultset.first()) {
+                            
+                           AdmTela adm = new AdmTela();
+                           adm.setVisible(true);
+                           dispose();
+                        } else {
+                            
+                            tentativas--;
+                            JOptionPane.showMessageDialog(null, "Usuário ou Senha incorreta \n" + tentativas + "  tentativas restantes.");
+                            Nome.setText("");
+                            Senha.setText("");
+                        }
+                        if (tentativas <= 0) {
+                            JOptionPane.showMessageDialog(null, "Você já realizou todas tentativas, fechando o programa. ");
+                            con_cliente.desconecta();
+                            System.exit(0);
+                        }
+                    } 
+        
+            
+                catch (NullPointerException ex) {
+                    JOptionPane.showMessageDialog(null, "Insira todos os campos");
                 } catch (SQLException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                        }
-                    
+                } 
+               
 
-
-            
-              
             
         });
         tela.add(Nome);

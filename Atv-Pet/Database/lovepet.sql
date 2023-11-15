@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/11/2023 às 00:18
+-- Tempo de geração: 15/11/2023 às 03:04
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -20,9 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `lovepet`
 --
-
 CREATE DATABASE `lovepet`;
-
 USE `lovepet`;
 -- --------------------------------------------------------
 
@@ -45,7 +43,29 @@ CREATE TABLE `pets` (
 --
 
 INSERT INTO `pets` (`Id_pet`, `Nome`, `Especie`, `Raca`, `Cor`, `Nas`, `Sexo`) VALUES
-(1, 'Loki', 'Cachorro', 'rottweiler', 'Preto', '2023-11-06', '1');
+(1, 'Loki', 'Cachorro', 'rottweiler', 'Preto', '2023-11-06', 'M'),
+(3, 'Fenix', 'Gato', 'Comum Europeu', 'Cinza', '2023-11-06', 'M'),
+(4, 'Luna', 'Vira-Lata', 'Gato', 'Branco', '2023-11-06', 'F');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `user`
+--
+
+CREATE TABLE `user` (
+  `Id` int(11) NOT NULL,
+  `Login` varchar(100) NOT NULL,
+  `Senha` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `user`
+--
+
+INSERT INTO `user` (`Id`, `Login`, `Senha`) VALUES
+(1, 'a', '123'),
+(2, 'Endrigo', '1104');
 
 --
 -- Índices para tabelas despejadas
@@ -58,6 +78,12 @@ ALTER TABLE `pets`
   ADD PRIMARY KEY (`Id_pet`);
 
 --
+-- Índices de tabela `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -65,7 +91,13 @@ ALTER TABLE `pets`
 -- AUTO_INCREMENT de tabela `pets`
 --
 ALTER TABLE `pets`
-  MODIFY `Id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id_pet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `user`
+--
+ALTER TABLE `user`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

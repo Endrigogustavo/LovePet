@@ -25,8 +25,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdmTela extends JFrame { 
     Conexao con_cliente;
-    JLabel rCodigo, rNome,rEspecie,rRaca,rCor,rPesquisar,rDes, img;
-    JTextField tCodigo, tNome,tEspecie,tRaca,tCor, tPesquisar,tDes;
+    JLabel rCodigo, rNome,rEspecie,rRaca,rCor,rPesquisar,rDes, img, rsexo;
+    JTextField tCodigo, tNome,tEspecie,tRaca,tCor, tPesquisar,tDes, tsexo;
     JButton primeiro, anterior, proximo, ultimo, registro, gravar, alterar, excluir,pesquisar,sair;
     
     JTable tblClientes;
@@ -35,19 +35,21 @@ public class AdmTela extends JFrame {
      
     
     public AdmTela() throws SQLException, ParseException{
-                ImageIcon fun = new ImageIcon("src/Img/2.png");
+
+        
+             ImageIcon fun = new ImageIcon("src/Img/2.png");
         img = new JLabel(fun);
         img.setBounds(0,0, 1253, 863); 
         
         Container tela = getContentPane();
-        
         rCodigo = new JLabel("Codigo");
         rNome = new JLabel("Nome");
         rEspecie = new JLabel("Especie");
         rRaca = new JLabel("Raça");
-        rCor = new JLabel("Estoque");
+        rCor = new JLabel("Cor");
         rPesquisar = new JLabel("Pesquisar");
-        rDes = new JLabel("Descrição");
+        rDes = new JLabel("Nascimento");
+        rsexo = new JLabel("Sexo");
         tCodigo = new JTextField();
         tNome = new JTextField();
         tEspecie= new JTextField();
@@ -55,6 +57,7 @@ public class AdmTela extends JFrame {
         tCor= new JTextField();
         tPesquisar= new JTextField();
         tDes= new JTextField();
+        tsexo= new JTextField();
 
 
 
@@ -71,7 +74,7 @@ public class AdmTela extends JFrame {
         proximo = new JButton ("Próximo");
         ultimo = new JButton ("Último");
         
-        registro = new JButton ("Nova Registro");
+        registro = new JButton ("Novo Registro");
         gravar = new JButton ("Gravar");
         alterar = new JButton ("Alterar");
         excluir = new JButton ("Excluir");
@@ -147,6 +150,7 @@ public class AdmTela extends JFrame {
                 tNome.setText("");
                 tRaca.setText("");
                 tDes.setText("");
+                tsexo.setText("");
             }
         });
         
@@ -157,8 +161,9 @@ public class AdmTela extends JFrame {
                 String tel = tRaca.getText();
                 String email = tEspecie.getText();
                 String des = tDes.getText();
+                String sex = tsexo.getText();
                 try{
-                 String insert_sql = "insert into pets(Nome,Especie,Raca,Cor,Nas)values('"+nome+"','"+tel+"','"+email+"','"+dt+"','"+des+"')";
+                 String insert_sql = "insert into pets(Nome,Especie,Raca,Cor,Nas,Sexo)values('"+nome+"','"+tel+"','"+email+"','"+dt+"','"+des+"','"+sex+"')";
                  con_cliente.statement.executeUpdate(insert_sql);
                  JOptionPane.showMessageDialog(null, "Gravado com sucesso");
                  
@@ -177,16 +182,17 @@ public class AdmTela extends JFrame {
                 String tel = tRaca.getText();
                 String email = tEspecie.getText();
                 String des = tDes.getText();
+                String sex = tsexo.getText();
                 String sql;
                 String msg="";
                
                 try {
                     if (tCodigo.getText().equals("")) {
-                       sql = "insert into pets(Nome,Especie,Raca,Cor,Nas)values('"+nome+"','"+tel+"','"+email+"','"+dt+"','"+des+"')";
+                       sql = "insert into pets(Nome,Especie,Raca,Cor,Nas,Sexo)values('"+nome+"','"+tel+"','"+email+"','"+dt+"','"+des+"','"+sex+"')";
                        msg="Gravado com sucesso";
                     }
                     else{
-                        sql = "update pets set Nome='"+nome+"',Especie='"+email+"',Raca='"+tel+"',Cor='"+dt+"',Nas='"+des+"'where Id_pet="+tCodigo.getText();
+                        sql = "update pets set Nome='"+nome+"',Especie='"+email+"',Raca='"+tel+"',Cor='"+dt+"',Nas='"+des+"',Sexo='"+sex+"'where Id_pet="+tCodigo.getText();
                         msg="Alterado com sucesso";
                     }
                     
@@ -306,7 +312,7 @@ public class AdmTela extends JFrame {
             {null, null,null,null,null,null},
             {null, null,null,null,null,null},
         },
-                new String [] {"Id_pet", "Nome", "Especie", "Raca", "Cor", "Nas"})
+                new String [] {"Id_pet", "Nome", "Especie", "Raca", "Cor", "Nas","Sexo"})
         {
             boolean[] canEdit = new boolean[]{
                 false, false,false,false,false,false
@@ -319,12 +325,13 @@ public class AdmTela extends JFrame {
         tblClientes.setAutoCreateRowSorter(true);
 
        
-        rCodigo.setBounds(50, 40, 150, 50);
-        rNome.setBounds(50, 80, 150, 50);
-        rEspecie.setBounds(50, 120, 150, 50);
-        rRaca.setBounds(50, 160, 150, 50);
-        rCor.setBounds(50, 200, 150, 50);
-        rDes.setBounds(50, 250, 150, 50);
+        rCodigo.setBounds(50, 20, 150, 50);
+        rNome.setBounds(50, 60, 150, 50);
+        rEspecie.setBounds(50, 100, 150, 50);
+        rRaca.setBounds(50, 140, 150, 50);
+        rCor.setBounds(50, 180, 150, 50);
+        rDes.setBounds(50, 220, 150, 50);
+        rsexo.setBounds(450, 20, 150, 50);
         
         rCodigo.setForeground(Color.white);
         rNome.setForeground(Color.white);
@@ -333,6 +340,7 @@ public class AdmTela extends JFrame {
         rCor.setForeground(Color.white);
         rPesquisar.setForeground(Color.white);
         rDes.setForeground(Color.white);
+        rsexo.setForeground(Color.white);
         
         rCodigo.setFont(new Font("Tahoma",Font.BOLD,15));
         rNome.setFont(new Font("Tahoma",Font.BOLD,15));
@@ -341,13 +349,15 @@ public class AdmTela extends JFrame {
         rCor.setFont(new Font("Tahoma",Font.BOLD,15));
         rPesquisar.setFont(new Font("Tahoma",Font.BOLD,15));
         rDes.setFont(new Font("Tahoma",Font.BOLD,15));
+        rsexo.setFont(new Font("Tahoma",Font.BOLD,15));
         
-        tCodigo.setBounds(130, 50, 80, 30);
-        tNome.setBounds(130, 90, 220, 30);
-        tEspecie.setBounds(130, 130, 200, 30);
-        tRaca.setBounds(130, 170, 100, 30);
-        tCor.setBounds(130, 210, 80, 30);
-        tDes.setBounds(130, 250, 250, 60);
+        tCodigo.setBounds(130, 30, 80, 30);
+        tNome.setBounds(130, 70, 220, 30);
+        tEspecie.setBounds(130, 120, 200, 30);
+        tRaca.setBounds(130, 160, 100, 30);
+        tCor.setBounds(130, 200, 80, 30);
+        tDes.setBounds(130, 240, 250, 60);
+        tsexo.setBounds(530, 30, 80, 30);
         
         
         tela.add(tEspecie);
@@ -362,9 +372,11 @@ public class AdmTela extends JFrame {
         tela.add(rCor);
         tela.add(tDes);
         tela.add(rDes);
+        tela.add(tsexo);
+        tela.add(rsexo);
         tela.add(tPesquisar);
                 
-        tela.add(img);
+                tela.add(img);
                 setSize(1253, 863);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -382,6 +394,7 @@ public class AdmTela extends JFrame {
             tRaca.setText(con_cliente.resultset.getString("Raca"));
             tCor.setText(con_cliente.resultset.getString("Cor"));
             tDes.setText(con_cliente.resultset.getString("Nas"));
+            tsexo.setText(con_cliente.resultset.getString("Sexo"));
             
         }catch(SQLException erro){
              JOptionPane.showMessageDialog(null, "Não localizou dados: "+erro,"Mensagem do prograna", JOptionPane.INFORMATION_MESSAGE);
@@ -391,10 +404,10 @@ public class AdmTela extends JFrame {
     {
         tblClientes.getColumnModel().getColumn(0).setPreferredWidth(4);
         tblClientes.getColumnModel().getColumn(1).setPreferredWidth(150);
-        tblClientes.getColumnModel().getColumn(2).setPreferredWidth(4);
-        tblClientes.getColumnModel().getColumn(3).setPreferredWidth(150);
-        tblClientes.getColumnModel().getColumn(4).setPreferredWidth(4);
-        tblClientes.getColumnModel().getColumn(5).setPreferredWidth(150);
+        tblClientes.getColumnModel().getColumn(2).setPreferredWidth(40);
+        tblClientes.getColumnModel().getColumn(3).setPreferredWidth(40);
+        tblClientes.getColumnModel().getColumn(4).setPreferredWidth(20);
+        tblClientes.getColumnModel().getColumn(5).setPreferredWidth(4);
  
         DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
         modelo.setNumRows(0);
@@ -409,6 +422,7 @@ public class AdmTela extends JFrame {
                 con_cliente.resultset.getString("Raca"), 
                 con_cliente.resultset.getString("Cor"),
                 con_cliente.resultset.getString("Nas"), 
+                con_cliente.resultset.getString("Sexo"), 
             });
             }
         }catch(SQLException erro){
