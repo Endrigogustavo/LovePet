@@ -222,7 +222,7 @@ public class AdmTela extends JFrame {
                         con_cliente.executaSQL("select * from pets order by Id_pet");
                         con_cliente.resultset.first();
                         preencherTabela();
-                        //posicionarRegistro();
+                        posicionarRegistro();
                     }
                     else{
                     JOptionPane.showMessageDialog(null, "Operaçao cancelada pelo usuario");
@@ -383,9 +383,21 @@ public class AdmTela extends JFrame {
 
         
         con_cliente.executaSQL("select * from pets order by Id_pet");
-        preencherTabela();
+                preencherTabela();
+        posicionarRegistro();
 
  }
+    
+        //método posicionarRegistro
+    public void posicionarRegistro() {
+        try {
+            con_cliente.resultset.first(); // posiciona no 1° registro da tabela
+            mostrar_Dados(); // chama o método que irá buscar o dado da tabela
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Não foi possível posicionar no primeiro registro: " + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
       public void mostrar_Dados(){
         try{
             tCodigo.setText(con_cliente.resultset.getString("Id_pet"));
